@@ -1,13 +1,12 @@
-# Olamma - Error Handling Middleware
+# Olamma - Error Handling middlewaree and tools
 
-This package provides a centralized error handling middleware for Express applications. It includes an error handler function and a custom error class that can be used to create and handle custom errors.
+Olamma aims to provides a clean error handling middleware for Express applications and other set of error handling and monitoring tools.
 
 The purpose of this project is to ensure that you have control over the HTTP errors your application sends out to consumers.
 
-And you don't have to re-invent the wheel, plus, it's also easily customizable.
 
 ## Goal
-The eventual goal is to allow you build applications that are smooth and  resilient.
+The eventual goal is to allow you build applications that are smooth and resilient.
 
 ## Installation
 
