@@ -6,6 +6,9 @@ The purpose of this project is to ensure that you have control over the HTTP err
 
 And you don't have to re-invent the wheel, plus, it's also easily customizable.
 
+## Goal
+The eventual goal is to allow you build applications that are smooth and  resilient.
+
 ## Installation
 
 ```shell
@@ -125,4 +128,4 @@ app.listen(3000, () => {
 This package is licensed under the MIT license
 
 ## Contributions
-Feel free to fork the project and add your contributions
+Feel free to fork the project and add your contributions. Make sure to run `npm run test` and be sure all tests are passing before making a pull request. 
