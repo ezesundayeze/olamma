@@ -2,6 +2,10 @@
 
 This package provides a centralized error handling middleware for Express applications. It includes an error handler function and a custom error class that can be used to create and handle custom errors.
 
+The purpose of this project is to ensure that you have control over the HTTP errors your application sends out to consumers.
+
+And you don't have to re-invent the wheel, plus, it's also easily customizable.
+
 ## Installation
 
 ```shell
@@ -14,7 +18,7 @@ Once you have installed the package, you can start using it in your Express appl
 
 ## Importing the Middleware
 
-In your application file, require the error handling middleware:
+In your application server file, require `olamma` like so:
 
 ```js
 const { errorHandler, CustomError } = require("olamma");
@@ -22,7 +26,7 @@ const { errorHandler, CustomError } = require("olamma");
 
 ## Using the Middleware
 
-The errorHandler function should be used as middleware in your Express application to handle errors. Here's an example of how to use it:
+`Olamma` errorHandler function should be used as middleware in your Express application to handle errors. Here's an example of how to use it:
 
 ```js
 app.use(errorHandler);
@@ -30,9 +34,9 @@ app.use(errorHandler);
 
 ## Error Mappings
 
-This project includes a predefined set of error mappings that map common error types to their corresponding HTTP status codes and error messages. These mappings are used by the errorHandler function to send a consistent response for known error types.
+It includes a predefined set of error mappings that map common error types to their corresponding HTTP status codes and error messages. These mappings are used by the errorHandler function to send a consistent response for known error types.
 
-You can modify or extend the error mappings as needed for your application. The mappings are defined in the errorMappings object and can be customized according to your requirements.
+You can extend or override the error mappings as needed for your application. The mappings are defined in the errorMappings object and can be customized according to your requirements.
 
 To add or override error mappings, you can use the setErrorMappings function provided by the package. Here's an example:
 
@@ -45,7 +49,7 @@ setErrorMappings({
 });
 ```
 
-Here is also how the errorMappings object look like
+Here is also how the errorMappings object looks like
 
 ```js
 {
@@ -62,7 +66,17 @@ Here is also how the errorMappings object look like
   }
 ```
 
-In the example above, we add a custom error mapping for the SyntaxError class, setting a status code of 404 and an error message of "Not found". This allows you to customize the response for specific error types.
+In the example above, we add a custom error mapping for the SyntaxError class, setting a status code of 404 and an error message of `Not found`. This allows you to customize the response for specific error types.
+
+## Error Loggin
+
+By default errors with 500 or > error codes are logged in the logs directory. However, you can decide to log other errors by setting the log value to true while throwing the error like so:
+
+```js
+throw new CustomError("Message", 400, true)
+```
+
+The third variable is the log settings.
 
 ## Example
 
