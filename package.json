@@ -1,16 +1,25 @@
 {
   "name": "olamma",
   "version": "0.0.1",
-  "description": "",
+  "description": "A description of your package",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
   "keywords": [],
-  "author": "",
+  "author": "Eze Sunday Eze",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ezesundayeze/olamma.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ezesundayeze/olamma/issues"
+  },
+  "homepage": "https://github.com/ezesundayeze/olamma",
   "dependencies": {
     "jest": "^29.5.0",
     "winston": "^3.9.0"
-  }
+  },
+  "devDependencies": {}
 }
