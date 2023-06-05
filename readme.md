@@ -22,7 +22,7 @@ const { errorHandler, CustomError } = require("olamma");
 
 ## Using the Middleware
 
-The errorHandler function should be used as middleware in your Express application to handle errors. It takes four parameters: err, req, res, and next. Here's an example of how to use it:
+The errorHandler function should be used as middleware in your Express application to handle errors. Here's an example of how to use it:
 
 ```js
 app.use(errorHandler);
