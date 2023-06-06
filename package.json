@@ -1,6 +1,6 @@
 {
   "name": "olamma",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A description of your package",
   "main": "index.js",
   "scripts": {
@@ -18,8 +18,9 @@
   },
   "homepage": "https://github.com/ezesundayeze/olamma",
   "dependencies": {
-    "jest": "^29.5.0",
     "winston": "^3.9.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
 }
