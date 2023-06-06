@@ -1,5 +1,7 @@
 # Olamma - Error Handling middlewaree and tools
 
+![Test](https://github.com/ezesundayeze/olamma/actions/workflows/test.yml/badge.svg)
+
 Olamma aims to provides a clean error handling middleware for Express applications and other set of error handling and monitoring tools.
 
 The purpose of this project is to ensure that you have control over the HTTP errors your application sends out to consumers.
