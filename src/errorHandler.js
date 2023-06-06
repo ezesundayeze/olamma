@@ -8,11 +8,9 @@ let errorMappings = require("./errorMappings");
  * @param {import('express').Response} res - The Express response object.
  * @param {import('express').NextFunction} next - The next middleware function.
  */
-function errorHandler(err, req, res, next) {
-  this.name = err.constructor.name;
-
+const errorHandler = (err, req, res, next) => {
   const { statusCode = err.statusCode || 500, message = err.message } =
-    errorMappings[this.name] || {};
+    errorMappings[err.name] || {};
 
   if (statusCode >= 500) {
     logger({ filename: "errors" }).error(
@@ -20,8 +18,8 @@ function errorHandler(err, req, res, next) {
     );
   }
 
-  res.status(statusCode).json({ error: message });
-}
+  res.status(statusCode).json({ error: { message } });
+};
 
 /**
  * Custom Error class with additional properties and logging functionality.

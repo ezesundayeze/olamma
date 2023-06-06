@@ -1,4 +1,8 @@
-const { errorHandler, CustomError, setErrorMappings } = require("../src/errorHandler");
+const {
+  errorHandler,
+  CustomError,
+  setErrorMappings,
+} = require("../src/errorHandler");
 
 describe("errorHandler", () => {
   it("should return the correct status code and error message for a known error type", () => {
@@ -13,7 +17,9 @@ describe("errorHandler", () => {
     errorHandler(err, req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ error: "Internal server error" });
+    expect(res.json).toHaveBeenCalledWith({
+      error: { message: "Internal server error" },
+    });
     expect(next).not.toHaveBeenCalled();
   });
 
@@ -29,7 +35,9 @@ describe("errorHandler", () => {
     errorHandler(err, req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ error: "Internal server error" });
+    expect(res.json).toHaveBeenCalledWith({
+      error: { message: "Internal server error" },
+    });
     expect(next).not.toHaveBeenCalled();
   });
 
@@ -45,7 +53,9 @@ describe("errorHandler", () => {
     errorHandler(err, req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ error: "Something went wrongh" });
+    expect(res.json).toHaveBeenCalledWith({
+      error: { message: "Something went wrongh" },
+    });
     expect(next).not.toHaveBeenCalled();
   });
 
@@ -53,7 +63,7 @@ describe("errorHandler", () => {
     setErrorMappings({
       SyntaxError: {
         statusCode: 404,
-        message: 'Not found',
+        message: "Not found",
       },
     });
 
@@ -68,7 +78,7 @@ describe("errorHandler", () => {
     errorHandler(err, req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.json).toHaveBeenCalledWith({ error: "Not found" });
+    expect(res.json).toHaveBeenCalledWith({ error: { message: "Not found" } });
     expect(next).not.toHaveBeenCalled();
   });
 });
