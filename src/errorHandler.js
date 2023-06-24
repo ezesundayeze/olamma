@@ -9,13 +9,14 @@ let errorMappings = require("./errorMappings");
  * @param {import('express').NextFunction} next - The next middleware function.
  */
 const errorHandler = (err, req, res, next) => {
-  const { statusCode = err.statusCode || 500, message = err.message } =
+  let { statusCode = err.statusCode || 500, message = err.message } =
     errorMappings[err.name] || {};
 
-  if (statusCode >= 500) {
+  if (errorMappings[err.name] || statusCode >= 500 ) {
     logger({ filename: "errors" }).error(
       JSON.stringify({ message: err.message, stack: err.stack })
     );
+    message = errorMappings[err.name].message;
   }
 
   res.status(statusCode).json({ error: { message } });

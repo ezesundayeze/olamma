@@ -18,7 +18,7 @@ describe("errorHandler", () => {
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({
-      error: { message: "Internal server error" },
+      error: { message: "Something went wrong. We are working on it!" },
     });
     expect(next).not.toHaveBeenCalled();
   });
@@ -36,7 +36,7 @@ describe("errorHandler", () => {
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({
-      error: { message: "Internal server error" },
+      error: { message: "Something went wrong. We are working on it!" },
     });
     expect(next).not.toHaveBeenCalled();
   });
