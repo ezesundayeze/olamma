@@ -1,14 +1,12 @@
-# Olamma - Error Handling middlewaree and tools
+# Olamma - Error Handling middleware middleware for your Express API
 
 ![Test](https://github.com/ezesundayeze/olamma/actions/workflows/test.yml/badge.svg)
 
-Olamma aims to provides a clean error handling middleware for Express applications and other set of error handling and monitoring tools.
-
-The purpose of this project is to ensure that you have control over the HTTP errors your application sends out to consumers.
+The purpose of this project is to ensure that you have control over the HTTP errors your API sends out to consumers
 
 
 ## Goal
-The eventual goal is to allow you build applications that are smooth and resilient.
+The eventual goal is to allow you to build applications with better user experience.
 
 ## Installation
 
@@ -18,7 +16,7 @@ npm install olamma
 
 ## Usage
 
-Once you have installed the package, you can start using it in your Express application.
+Once you have installed the package, you can start using it in your Express API.
 
 ## Importing the Middleware
 
@@ -30,47 +28,11 @@ const { errorHandler, CustomError } = require("olamma");
 
 ## Using the Middleware
 
-`Olamma` errorHandler function should be used as middleware in your Express application to handle errors. Here's an example of how to use it:
+`olamma` errorHandler function should be used as middleware in your Express application to handle errors. Here's an example of how to use it:
 
 ```js
 app.use(errorHandler);
 ```
-
-## Error Mappings
-
-It includes a predefined set of error mappings that map common error types to their corresponding HTTP status codes and error messages. These mappings are used by the errorHandler function to send a consistent response for known error types.
-
-You can extend or override the error mappings as needed for your application. The mappings are defined in the errorMappings object and can be customized according to your requirements.
-
-To add or override error mappings, you can use the setErrorMappings function provided by the package. Here's an example:
-
-```js
-setErrorMappings({
-  SyntaxError: {
-    statusCode: 404,
-    message: "Not found",
-  },
-});
-```
-
-Here is also how the errorMappings object looks like
-
-```js
-{
-  SyntaxError: { statusCode: 500, message: "Internal server error" },
-  TypeError: { statusCode: 500, message: "Internal server error" },
-  ReferenceError: { statusCode: 500, message: "Reference error" },
-  RangeError: { statusCode: 500, message: "Invalid input range" },
-  ValidationError: { statusCode: 400, message: "Validation failed" },
-  MongoError: { statusCode: 500, message: "Database error" },
-  AuthenticationError: { statusCode: 401, message: "Authentication failed" },
-  MySQLError: { statusCode: 500, message: "MySQL database error" },
-  MongoDBError: { statusCode: 500, message: "MongoDB database error" },
-  PostgreSQLError: { statusCode: 500, message: "PostgreSQL database error" }
-  }
-```
-
-In the example above, we add a custom error mapping for the SyntaxError class, setting a status code of 404 and an error message of `Not found`. This allows you to customize the response for specific error types.
 
 ## Error Loggin
 
@@ -91,7 +53,6 @@ const express = require("express");
 const {
   errorHandler,
   CustomError,
-  setErrorMappings,
 } = require("olamma");
 
 const app = express();
@@ -106,14 +67,6 @@ app.get("/custom-error", (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
-
-// Set custom error mappings. You can have this in a separate file
-setErrorMappings({
-  CustomError: {
-    statusCode: 404,
-    message: "Not found",
-  },
 });
 
 // Error handling middleware
