@@ -1,25 +1,24 @@
-# Olamma - Error Handling middleware middleware for your Express API
+# Olamma - Express API Error Handling Middleware
 
 ![Test](https://github.com/ezesundayeze/olamma/actions/workflows/test.yml/badge.svg)
 
-The purpose of this project is to ensure that you have control over the HTTP errors your API sends out to consumers
-
+The Olamma project focuses on empowering you with control over the HTTP error responses your API delivers to consumers.
 
 ## Goal
-The eventual goal is to allow you to build applications with better user experience. 
+The ultimate objective of this project is to enable you to create applications that provide enhanced user experiences.
 
-## Perspective
-The unique perspective for this project is to allow you to start handling and providing useful error messages from day of your project.
+## Unique Approach
+Olamma takes a distinctive approach by allowing you to immediately start managing and delivering meaningful error messages from the very beginning of your project.
 
-## Practical use case
+## Practical Scenario
 
-Your system throws a system error or an unexpected error like:
+Imagine your system encounters an unexpected error, such as:
 
 ```js
 new SyntaxError("Invalid or unexpected token");
 ```
 
-With Olamma, instead users seeing this error, they'll see `something went wrong` and you can also change this message by setting the default error message by passing `setError` into your express middleware.
+With Olamma, instead of users encountering this technical message, they will receive a user-friendly "something went wrong" error message. Moreover, you can effortlessly modify this message by using the `setError` function within your Express middleware.
 
 ## Installation
 
@@ -29,60 +28,65 @@ npm install olamma
 
 ## Usage
 
-Once you have installed the package, you can start using it in your Express API.
+After installing the package, you can seamlessly integrate it into your Express API.
 
 ## Importing the Middleware
 
-In your application server file, require `olamma` like so:
+In your application's server file, import `olamma` as follows:
 
 ```js
-const { errorHandler, CustomError } = require("olamma");
+const { errorHandler, CustomError, setError } = require("olamma");
 ```
 
-## Using the Middleware
+## Implementing the Middleware
 
-`olamma` errorHandler function should be used as middleware in your Express application to handle errors. Here's an example of how to use it:
+Use the `errorHandler` function from `olamma` as middleware in your Express application for error handling. Here's an example of its usage:
 
 ```js
+setError("Your Default Error message"); // This is optional. If not set, the default error message will be "something went wrong".
+// Implement the error handling middleware
 app.use(errorHandler);
 ```
 
-## Error Loggin
+## Error Logging
 
-By default errors with 500 or > error codes are logged in the logs directory. However, you can decide to log other errors by setting the log value to true while throwing the error like so:
+By default, errors with status codes of 500 or greater are logged in the "logs" directory. However, you can customize the logging behavior by setting the log parameter to `true` when throwing an error, as shown below:
 
 ```js
-throw new CustomError("Message", 400, true)
+throw new CustomError("Message", 400, true);
 ```
 
-The third variable is the log settings.
+In this case, the third argument, `true`, enables logging.
 
 ## Example
 
-Here's an example of how to use the error handling middleware in an Express application:
+Here's an example of utilizing the error handling middleware within an Express application:
 
 ```js
 const express = require("express");
 const {
   errorHandler,
   CustomError,
+  setError
 } = require("olamma");
 
 const app = express();
 
 // Define your routes and middleware...
 
-// Custom error example
+// Example of using custom error
 app.get("/custom-error", (req, res, next) => {
   try {
-    // Throw a custom error. Setting the log=true means you want to log message and stack trace. So, however, by default statusCode > 500 are all logged.
+    // Throw a custom error. Setting the log=true indicates you wish to log the message and stack trace. By default, all status codes above 500 are logged.
     throw new CustomError("This is a custom error message", 400, true);
   } catch (error) {
     next(error);
   }
 });
 
-// Error handling middleware
+setError("Your Default Error message"); // This is optional. If not set, the default error message will be "something went wrong".
+
+// Implement the error handling middleware
 app.use(errorHandler);
 
 // Start the server
@@ -92,7 +96,7 @@ app.listen(3000, () => {
 ```
 
 ## License
-This package is licensed under the MIT license
+This package is licensed under the MIT license.
 
 ## Contributions
-Feel free to fork the project and add your contributions. Make sure to run `npm run test` and be sure all tests are passing before making a pull request. 
+You're welcome to fork the project and contribute. Ensure that all tests pass by running `npm run test` before submitting a pull request.
