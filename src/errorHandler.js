@@ -1,5 +1,4 @@
 const logger = require("./logger");
-let errorMappings = require("./errorMappings");
 
 /**
  * Centralized error handling middleware.
@@ -9,18 +8,30 @@ let errorMappings = require("./errorMappings");
  * @param {import('express').NextFunction} next - The next middleware function.
  */
 const errorHandler = (err, req, res, next) => {
-  let { statusCode = err.statusCode || 500, message = err.message } =
-    errorMappings[err.name] || {};
+  // Default values for the error response
+  let statusCode = err.statusCode || 500;
+  let message = err.message
 
-  if (errorMappings[err.name] || statusCode >= 500 ) {
+  // Check if it's an unknown error (statusCode does not exist or is not 4xx or 5xx)
+  if (!err.statusCode || (err.statusCode >= 600 || err.statusCode < 400)) {
+    statusCode = 500;
+  }
+
+  // Log the stack trace for unknown errors (status code outside 4xx and 5xx range)
+  if (statusCode >= 500) {
+
     logger({ filename: "errors" }).error(
       JSON.stringify({ message: err.message, stack: err.stack })
     );
-    message = errorMappings[err.name].message;
+
+    message = "Something went wrong";
   }
 
+
+  // Respond to the client with the error information
   res.status(statusCode).json({ error: { message } });
 };
+
 
 /**
  * Custom Error class with additional properties and logging functionality.
@@ -58,20 +69,4 @@ class CustomError extends Error {
   }
 }
 
-/**
- * Set custom error mappings.
- * @param {Object} mappings - The custom error mappings to add or override.
- * @example
- * // Add custom error mapping
- * setErrorMappings({
- *   CustomError: {
- *     statusCode: 404,
- *     message: 'Not found',
- *   },
- * });
- */
-function setErrorMappings(mappings) {
-  errorMappings = { ...errorMappings, ...mappings };
-}
-
-module.exports = { errorHandler, CustomError, setErrorMappings };
+module.exports = { errorHandler, CustomError };
