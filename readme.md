@@ -6,7 +6,20 @@ The purpose of this project is to ensure that you have control over the HTTP err
 
 
 ## Goal
-The eventual goal is to allow you to build applications with better user experience.
+The eventual goal is to allow you to build applications with better user experience. 
+
+## Perspective
+The unique perspective for this project is to allow you to start handling and providing useful error messages from day of your project.
+
+## Practical use case
+
+Your system throws a system error or an unexpected error like:
+
+```js
+new SyntaxError("Invalid or unexpected token");
+```
+
+With Olamma, instead users seeing this error, they'll see `something went wrong` and you can also change this message by setting the default error message by passing `setError` into your express middleware.
 
 ## Installation
 

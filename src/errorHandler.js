@@ -1,4 +1,5 @@
 const logger = require("./logger");
+let defaultErrorMessage = null;
 
 /**
  * Centralized error handling middleware.
@@ -24,13 +25,22 @@ const errorHandler = (err, req, res, next) => {
       JSON.stringify({ message: err.message, stack: err.stack })
     );
 
-    message = "Something went wrong";
+    const error = getError();
+    message = error || "Something went wrong";
   }
 
 
   // Respond to the client with the error information
   res.status(statusCode).json({ error: { message } });
 };
+
+const setError = (message) => {
+  defaultErrorMessage = message;
+}
+
+const getError = () => {
+  return defaultErrorMessage;
+}
 
 
 /**
@@ -69,4 +79,4 @@ class CustomError extends Error {
   }
 }
 
-module.exports = { errorHandler, CustomError };
+module.exports = { errorHandler, CustomError, setError };

@@ -1,6 +1,6 @@
 {
   "name": "olamma",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A description of your package",
   "main": "index.js",
   "scripts": {
